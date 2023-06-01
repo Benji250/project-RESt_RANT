@@ -1,7 +1,13 @@
-const router = require('express').Router()
+require('dotenv').config()
+const express = require('express')
+const app = express()
 
-router.get('/', (req,res) =>{
-    res.send('GET /places')
+app.use('/', (req,res), require('./controllers/places'))
+
+app.get('/', (req,res) => {
+    res.send('Hello world!')
 })
-
-module.exports = router
+app.get('*', (req,res) => {
+    res.status(404) .send('<h1>404 Page</h1>')
+})
+app.listen(process.env.PORT)
