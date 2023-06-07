@@ -6,14 +6,20 @@ function new_form () {
         <Def>
           <main>
             <h1>Add a New Place</h1>
-            <form method="POST" action="/places">
-                <div classname="form-group">
-                    <label htmlFor="name">Place Name</label>
-                    <input className='form-control' id="name" name="name" required />
+            <form method="POST" action={`/places/${data.place.id}?_method=PUT`}>
+                <div>
+                    <div classname="form-group col-sm-6">
+                        <label htmlFor="name">Place Name</label>
+                        <input className='form-control' 
+                        id="name" 
+                        name="name" 
+                        value={data.place.name} 
+                        required />
+                    </div>
+                    <div classname="form-group col-sm-6">
+                        <label htmlFor="pic">Place Picture</label>
+                        <input className='form-control' id="pic" name="pic" />
                 </div>
-                <div classname="form-group">
-                    <label htmlFor="pic">Place Picture</label>
-                    <input className='form-control' id="pic" name="pic" />
                 </div>
                 <div classname="form-group">
                     <label htmlFor="city">City</label>
