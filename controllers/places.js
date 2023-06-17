@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const db = require('../modles')
+const db = require('../models')
 
 router.get('/', (req, res) => {
   db.Place.find()
@@ -18,8 +18,19 @@ router.post('/', (req, res) => {
     res.redirect('/places')
   })
   .catch(err => {
-    console.log('err', err)
+    if(err && err.name == 'ValidationError'){
+      let message = 'Validation Error: '
+      for (var field in err.errors) {
+        message += `${field} was ${err.error[field].value}.`
+        message += `${err.errors[field].message}`
+      }
+      console.log('Validation error message', message)
+      // TODO: Generate error message(s)
+      res.render('places/new', { message })
+    }
+    else {
     res.render('error404')
+    }
   })
 })
 
